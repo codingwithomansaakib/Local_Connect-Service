@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = document.getElementById("password").value;
 
     try {
-      const res = await fetch("http://localhost:3000/api/login/provider", {
+      const res = await fetch("https://nearbyfix.in/api/login/provider", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone, password })
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const message = this.message.value;
 
   try {
-    const res = await fetch("http://localhost:3000/api/contact", {
+    const res = await fetch("https://nearbyfix.in/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, message })
