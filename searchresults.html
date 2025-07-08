@@ -212,7 +212,7 @@
       const service = localStorage.getItem("search_service");
       const pincode = localStorage.getItem("search_pincode");
 
-      fetch(`http://localhost:3000/api/search?service=${service}&pincode=${pincode}`)
+      fetch(`https://nearbyfix.in/api/search?service=${service}&pincode=${pincode}`)
         .then(res => res.json())
         .then(data => {
           const resultsDiv = document.getElementById("results");
