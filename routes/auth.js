@@ -59,12 +59,16 @@ router.get('/search', async (req, res) => {
   const { service, pincode } = req.query;
 
   try {
-    const results = await ServiceProvider.find({ service, pincode });
+    const results = await ServiceProvider.find({
+      service: { $regex: new RegExp(`^${service}$`, 'i') }, // case-insensitive match
+      pincode
+    });
     res.json(results);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 // user login
 /*router.post('/login/user', async (req, res) => {
   const { email, password } = req.body;
