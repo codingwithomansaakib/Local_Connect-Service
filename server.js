@@ -15,6 +15,11 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 app.use(cors());
+app.use(cors({
+  origin: 'https://nearbyfix.in',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 
 // ✅ 2. Middleware to parse JSON and form data
 app.use(express.json());
