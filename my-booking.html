@@ -110,7 +110,7 @@
         return;
       }
 
-      const res = await fetch(`http://localhost:3000/api/bookings/${userEmail}`);
+      const res = await fetch(`https://nearbyfix.in/api/bookings/${userEmail}`);
       const data = await res.json();
 
       if (!Array.isArray(data) || data.length === 0) {
@@ -141,7 +141,7 @@
         pincode
       };
 
-      const res = await fetch("http://localhost:3000/api/book", {
+      const res = await fetch("https://nearbyfix.in/api/book", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bookingData)
@@ -157,7 +157,7 @@
       }
 
       // 👉 Paid booking: open Razorpay
-      const paymentRes = await fetch("http://localhost:3000/api/create-payment", {
+      const paymentRes = await fetch("https://nearbyfix.in/api/create-payment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount: 900, name: userName, email: userEmail }) // ₹9 = 900 paise
@@ -173,7 +173,7 @@
         description: " Service Booking Payment",
         order_id: order.id,
         handler: async function (response) {
-          const confirm = await fetch("http://localhost:3000/api/confirm-payment", {
+          const confirm = await fetch("https://nearbyfix.in/api/confirm-payment", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

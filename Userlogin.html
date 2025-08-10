@@ -93,7 +93,7 @@
           const password = document.getElementById("password").value;
 
           try {
-            const res = await fetch("http://localhost:3000/api/login/user", {
+            const res = await fetch("https://nearbyfix.in/api/login/user", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ email, password }),

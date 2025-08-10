@@ -133,7 +133,7 @@
           const longitude = data[0].lon;
           console.log({ fullName, phone, password, service, pincode, latitude, longitude });
           // Now send all data to backend using fetch
-          const response = await fetch("http://localhost:3000/api/signup/provider", {
+          const response = await fetch("https://nearbyfix.in/api/signup/provider" ,  {
             method: "POST",
             headers: {
               "Content-Type": "application/json"

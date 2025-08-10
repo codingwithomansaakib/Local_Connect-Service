@@ -125,7 +125,7 @@
       }
 
       try {
-        const res = await fetch(`http://localhost:3000/api/bookings/${userEmail}`);
+        const res = await fetch(`https://nearbyfix.in/api/bookings/${userEmail}`);
         const data = await res.json();
 
         const container = document.getElementById("bookingList");

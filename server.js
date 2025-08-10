@@ -1,3 +1,5 @@
+require('dotenv').config(); // ⬅️ Add this line at the top
+
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -5,14 +7,22 @@ const cors = require('cors');
 const app = express();
 
 // ✅ 1. Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/localservices', {
+mongoose.set('debug', true); // Logs all MongoDB queries
+
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
 .then(() => console.log("✅ MongoDB connected"))
 .catch((err) => console.error("❌ MongoDB connection error:", err));
 
+
 app.use(cors());
+app.use(cors({
+  origin: 'https://nearbyfix.in',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 
 // ✅ 2. Middleware to parse JSON and form data
 app.use(express.json());

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
-const ServiceProvider = require('../models/ServiceProvider');
+const ServiceProvider = require('../models/Serviceprovider');
 
 // User Signup
 router.post('/signup/user', async (req, res) => {
@@ -59,12 +59,29 @@ router.get('/search', async (req, res) => {
   const { service, pincode } = req.query;
 
   try {
-    const results = await ServiceProvider.find({ service, pincode });
+    const results = await ServiceProvider.find({
+      service: { $regex: new RegExp(`^${service}$`, 'i') }, // case-insensitive match
+      pincode
+    });
     res.json(results);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+router.get('/search', async (req, res) => {
+  const { service, pincode } = req.query;
+
+  try {
+    const results = await ServiceProvider.find({
+      service: { $regex: new RegExp(`^${service}$`, 'i') }, // case-insensitive match
+      pincode
+    });
+    res.json(results);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // user login
 /*router.post('/login/user', async (req, res) => {
   const { email, password } = req.body;
@@ -112,22 +129,6 @@ router.post('/login/provider', async (req, res) => {
 });
 
 
-
-router.get("/create-test-user", async (req, res) => {
-  try {
-    const hashedPassword = await bcrypt.hash("123456", 10);
-    const newUser = new User({
-      fullName: "Test User",
-      email: "testuser@example.com",
-      password: hashedPassword
-    });
-
-    await newUser.save();
-    res.send("Test user created ✅");
-  } catch (err) {
-    res.status(500).send("Error creating user: " + err.message);
-  }
-});
 
 
 

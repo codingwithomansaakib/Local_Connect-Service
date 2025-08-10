@@ -212,7 +212,7 @@
       const service = localStorage.getItem("search_service");
       const pincode = localStorage.getItem("search_pincode");
 
-      fetch(`http://localhost:3000/api/search?service=${service}&pincode=${pincode}`)
+      fetch(`https://nearbyfix.in/api/search?service=${service}&pincode=${pincode}`)
         .then(res => res.json())
         .then(data => {
           const resultsDiv = document.getElementById("results");
@@ -267,7 +267,7 @@
       };
 
       try {
-        const bookingRes = await fetch("http://localhost:3000/api/book", {
+        const bookingRes = await fetch("https://nearbyfix.in/api/book", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(bookingData),
@@ -288,7 +288,7 @@
         }
 
         // If payment required
-        const paymentRes = await fetch("http://localhost:3000/api/create-payment", {
+        const paymentRes = await fetch("https://nearbyfix.in/api/create-payment", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -315,7 +315,7 @@
             alert("Payment successful!");
 
             // Notify backend of payment success
-            await fetch("http://localhost:3000/api/confirm-payment", {
+            await fetch("https://nearbyfix.in/api/confirm-payment", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
